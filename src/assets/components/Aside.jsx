@@ -6,8 +6,8 @@ export default function Aside() {
     return (
         <>
          <aside>
-            <img src={logo} alt="Little Lemon Logo" />
-            <img src={hero} alt="Hero" />
+            <img className='logo' src={logo} alt="Little Lemon Logo" />
+            <img className='hero' src={hero} alt="Hero" />
         </aside>
         </>
     )

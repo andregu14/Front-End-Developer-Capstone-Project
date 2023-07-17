@@ -1,17 +1,20 @@
 export default function Main() {
     return (
         <>
-            <header>
-                <button>
-                    Go back button
-                    <img src="" alt="" />
-                </button>
-            </header>
+
             <main>
-                <h1>Book a Table</h1>
+                <header>
+                    <button className="back-button">
+                        <span class="material-symbols-outlined">
+                            arrow_left_alt
+                        </span>
+                    </button>
+                    <h1>Book a Table</h1>
+                </header>
+
                 <form>Formulario de cadastro</form>
             </main>
-           
+
         </>
     )
 }
