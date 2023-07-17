@@ -1,38 +1,152 @@
-.App {
-  text-align: center;
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--default-font);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  font-size: 62.5%;
+  --default-border: 0.1rem solid rgba(0, 0, 0, 0.15);
+  --default-font: 'Karla', sans-serif;
+  --yellow: #F4CE14;
+  --green: #495E57;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  font-family: var(--default-font);
+  font-size: 1rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#app {
+  display: grid;
+  grid-template-areas:
+    ". . .  ."
+    ". hero  form ."
+    ". hero  form ."
+    ". . . ."
+  ;
+  gap: 10em 1em;
+}
+
+main {
+  grid-area: form;
+}
+
+aside {
+  grid-area: hero;
+}
+
+main {
+  width: 100%;
+  height: 130%;
+  border: var(--default-border);
+  padding: 3em 5em;
+  border-radius: 16px;
+
+  position: relative;
+}
+
+main header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 15rem;
+}
+
+h1 {
+  font-size: 4rem;
+  display: inline-flex;
+  font-weight: 800;
+  color: var(--yellow);
+}
+
+aside {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.back-button {
+  height: 50px;
+  width: 50px;
+  display: inline-flex;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--green);
+  display: flex;
+  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.logo {
+  width: 45em;
+  display: block;
+  margin-bottom: 40px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.hero {
+  width: 40em;
+  display: block;
+  border-radius: 10px;
+}
+
+@media (max-width: 1024px) {
+  #app {
+    gap: 5.5em 0;
   }
-  to {
-    transform: rotate(360deg);
+
+  body {
+    font-size: 1.2rem;
+  }
+
+  main {
+    width: 90vw;
+    margin: 0 10px;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  aside {
+    display: none;
+  }
+
+  .back-button {
+    height: 40px;
+    width: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  #app {
+    gap: 0em 0em;
+  }
+
+  body {
+    font-size: 1rem;
+  }
+
+  main {
+    width: 30em;
+    margin: 0;
+    border: none;
+    width: 100vw;
+  }
+
+  main header {
+    gap: 4rem;
+  }
+
+  h1 {
+    font-size: 2rem;
   }
 }
