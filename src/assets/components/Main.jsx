@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import {
@@ -20,12 +20,50 @@ import {
     Heading,
   } from '@chakra-ui/react'
 
-function Main() {
-    const [resDate, setResDate] = useState("")
+export default function Main() {
+
+    return (
+    <main>
+        <Box>
+            <Wrap spacing='100' spacingY={0} mb={10}>
+                <WrapItem>
+                    <Button colorScheme="green">{<AiOutlineArrowLeft />}</Button>
+                </WrapItem>
+                <WrapItem>
+                    <Heading as="h1">Book a Table</Heading>
+                </WrapItem>
+            </Wrap>
+            <Form />
+            
+        </Box>
+    </main>
+)}
+
+const Form = () => {
+    let today = new Date();
+    let year = today.getFullYear();
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+
+    // Add leading zeros to month and day if necessary
+    if (month < 10) {
+        month = '0' + month;
+    }
+    if (day < 10) {
+        day = '0' + day;
+    }
+
+    let dateString = year + '-' + month + '-' + day;
+
+    const [resDate, setResDate] = useState(dateString)
     const [resTime, setResTime] = useState("")
     const [guests, setGuests] = useState(2)
     const [occasion, setOccasion] = useState("")
     const [availableTimes, setAvailableTimes] = useState(["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"])
+
+    useEffect(() => {
+        console.log(resDate);
+    }, [resDate])
 
     const formik = useFormik({
         initialValues: {
@@ -44,20 +82,9 @@ function Main() {
             occasion: Yup.string().required('Required'),
           }),
       });
-  
+
     return (
-    <main>
-        <Box>
-            <Wrap spacing='135px' mb={10}>
-                <WrapItem>
-                    <Button colorScheme="green">{<AiOutlineArrowLeft />}</Button>
-                </WrapItem>
-                <WrapItem>
-                    <Heading as="h1">Book a Table</Heading>
-                </WrapItem>
-            </Wrap>
-            
-            <form onSubmit={formik.handleSubmit}
+        <form onSubmit={formik.handleSubmit}
             style={{
             display: "grid",
             maxWidth: "225px",
@@ -71,6 +98,7 @@ function Main() {
                         name="resDate"
                         value={resDate}
                         onChange={e => setResDate(e.target.value)}
+                        borderRadius={16}
                     />
                     <FormErrorMessage>{formik.errors.resDate}</FormErrorMessage>
                 </FormControl>
@@ -82,6 +110,7 @@ function Main() {
                         name="resTime"
                         onChange={e => setResTime(e.target.value)}
                         placeholder="Select the Time"
+                        borderRadius={16}
                     >
                         {availableTimes.map(time => (
                             <option key={time}>{time}</option>
@@ -98,7 +127,7 @@ function Main() {
                             defaultValue={guests}
                             onChange={(value) => setGuests(value)}
                         >
-                            <NumberInputField/>
+                            <NumberInputField borderRadius={16}/>
                             <NumberInputStepper>
                                 <NumberIncrementStepper />
                                 <NumberDecrementStepper />
@@ -113,7 +142,9 @@ function Main() {
                             name="occasion"
                             placeholder="Select the Occasion"
                             onChange={e => setOccasion(e.target.value)}
+                            borderRadius={16}
                         >
+                            <option>None</option>
                             <option>Birthday</option>
                             <option>Anniversary</option>
                         </Select>
@@ -126,11 +157,8 @@ function Main() {
                     bg={"#F4CE14"}
                     color={'black'}
                 >
-                    Submit
+                    Confirm Reservation
                 </Button>
             </form>
-        </Box>
-    </main>
-)}
-  
-export default Main;
+    )
+}
