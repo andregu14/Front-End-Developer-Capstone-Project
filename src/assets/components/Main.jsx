@@ -20,7 +20,6 @@ import {
     Heading,
     Alert,
     AlertIcon,
-    Slide,
     Fade,
   } from '@chakra-ui/react'
 
@@ -46,6 +45,7 @@ export default function Main() {
 const Form = () => {
     const [availableTimes, setAvailableTimes] = useState(["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"])
     const [showConfirmation, setShowConfirmation] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         if (showConfirmation) {
@@ -66,8 +66,12 @@ const Form = () => {
             occasion: "",
         },
         onSubmit: () => {
-            setShowConfirmation(true);
-            formik.resetForm();
+            setIsLoading(true)
+            setTimeout(() => {
+                setShowConfirmation(true);
+                setIsLoading(false);
+                formik.resetForm();
+            }, 2500);
           },
         validationSchema: Yup.object({
             resDate: Yup.date()
@@ -179,6 +183,8 @@ const Form = () => {
                     bg={"#F4CE14"}
                     color={'black'}
                     aria-label="Confirm reservation"
+                    isDisabled={!(formik.isValid && formik.dirty) || formik.isSubmitting}
+                    isLoading={isLoading}
                 >
                     Confirm Reservation
                 </Button>
