@@ -120,15 +120,18 @@ aside {
     gap: 0em 0em;
   }
 
+  #title {
+    gap: 0px;
+  }
+
   body {
     font-size: 1rem;
   }
 
   main {
-    width: 30em;
     margin: 0;
     border: none;
-    width: 100vw;
+    width: 90vw;
   }
 
   main header {
