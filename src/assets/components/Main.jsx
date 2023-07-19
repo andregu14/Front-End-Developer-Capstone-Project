@@ -40,22 +40,7 @@ export default function Main() {
 )}
 
 const Form = () => {
-    let today = new Date();
-    let year = today.getFullYear();
-    let month = today.getMonth() + 1;
-    let day = today.getDate();
-
-    // Add leading zeros to month and day if necessary
-    if (month < 10) {
-        month = '0' + month;
-    }
-    if (day < 10) {
-        day = '0' + day;
-    }
-
-    let dateString = year + '-' + month + '-' + day;
-
-    const [resDate, setResDate] = useState(dateString)
+    const [resDate, setResDate] = useState("")
     const [resTime, setResTime] = useState("")
     const [guests, setGuests] = useState(2)
     const [occasion, setOccasion] = useState("")
@@ -99,6 +84,7 @@ const Form = () => {
                         value={resDate}
                         onChange={e => setResDate(e.target.value)}
                         borderRadius={16}
+                        aria-label="Reservation date"
                     />
                     <FormErrorMessage>{formik.errors.resDate}</FormErrorMessage>
                 </FormControl>
@@ -111,6 +97,7 @@ const Form = () => {
                         onChange={e => setResTime(e.target.value)}
                         placeholder="Select the Time"
                         borderRadius={16}
+                        aria-label="Reservation time"
                     >
                         {availableTimes.map(time => (
                             <option key={time}>{time}</option>
@@ -126,6 +113,7 @@ const Form = () => {
                             max={10} min={1}
                             defaultValue={guests}
                             onChange={(value) => setGuests(value)}
+                            aria-label="Number of guests"
                         >
                             <NumberInputField borderRadius={16}/>
                             <NumberInputStepper>
@@ -143,6 +131,7 @@ const Form = () => {
                             placeholder="Select the Occasion"
                             onChange={e => setOccasion(e.target.value)}
                             borderRadius={16}
+                            aria-label="Occasion"
                         >
                             <option>None</option>
                             <option>Birthday</option>
@@ -156,6 +145,7 @@ const Form = () => {
                     type='submit'
                     bg={"#F4CE14"}
                     color={'black'}
+                    aria-label="Confirm reservation"
                 >
                     Confirm Reservation
                 </Button>
